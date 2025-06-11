@@ -4,7 +4,9 @@ import { Component } from '@angular/core';
   selector: 'app-add-to-cart',
   templateUrl: './add-to-cart.component.html',
   styleUrl: './add-to-cart.component.scss'
-});
+})
+
+
 
 export class AddToCartComponent {
   isAddedToCart = false;

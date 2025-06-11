@@ -1,33 +1,26 @@
-import { Component } from '@angular/core';
-import desseretData from '../../public/data.json';
-import { AddToCartComponent } from "./components/add-to-cart/add-to-cart.component";
+import { Component, inject, OnInit } from '@angular/core';
+import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
+import { Dessert } from '../shared/interfaces';
+import { ProductsServiceService } from './services/products.service';
 
 @Component({
   selector: 'app-root',
+  imports: [AddToCartComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-});
+  styleUrl: './app.component.scss',
+})
 
-// interface
-interface Dessert {
-  image: DessertImages;
-  name: string;
-  category: string;
-  price: number;
-};
-
-interface DessertImages {
-  thumbnail: string;
-  mobile: string;
-  tablet: string;
-  desktop: string;
-};
-
-export class AppComponent {
+// Bug found:The problem is that the Angular component decorator property should be named styleUrls (plural) instead of styleUrl (singular), and the decorator should not end with a semicolon.
+export class AppComponent implements OnInit {
   title = 'Product list';
-  desserts:Dessert[] | null = null;
+  desserts: Dessert[] | null = null;
+  private dessertsData = inject(ProductsServiceService);
 
-  constructor() {
-    this.desserts = desseretData;
-  };
-};
+  ngOnInit(): void {
+   this.dessertsData.getProducts().subscribe(data => this.desserts = data);
+
+}
+
+
+
+}
