@@ -1,5 +1,5 @@
 
-@use 'variables' as *;
+@use '_variables' as *;
 
 @mixin flex($direction:row, $justify:flex-start, $align:stretch, $gap:0) {
   display: flex;
