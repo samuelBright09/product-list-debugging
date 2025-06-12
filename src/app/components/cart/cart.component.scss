@@ -2,15 +2,42 @@
 @use 'variables' as *;
 
 .cart {
+  width: 300px;
+  height: fit-content;
+  flex: 1 0 380px;
   padding: 1.5rem;
-  background: $white;
-  border-radius: 8px;
-  width: 384px;
+  background-color: $white;
+  border-radius: 0.75rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    width: 100%;
+  }
+
+  @media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-desktop) {
+    width: 100%;
+  }
 
   h2 {
     @include TextPreset2;
     color: $red;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .content {
+    width: 100%;
+    height: fit-content;
+   
+
+    .empty-cart-content {
+      @include flex(column, center, center);
+      width: 100%;
+      
+      p {
+        @include TextPreset4Bold;
+        color: $rose-500;
+        margin-top: 1rem;
+      }
+    }
   }
 }
 
@@ -117,3 +144,5 @@
     }
   }
 }
+
+

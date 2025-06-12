@@ -3,10 +3,19 @@
 @use 'variables' as *;
 
 body {
+  padding: 5.5rem 7rem;
   @include flex();
   width: 100%;
   min-height: 100dvh;
   background-color: $rose-50;
+
+  @media (max-width: $breakpoint-mobile)  {
+    padding: 1.5rem;
+  }
+
+  @media (min-width: $breakpoint-tablet)  {
+    padding: 2.5rem;
+  }
 }
 
 img {
