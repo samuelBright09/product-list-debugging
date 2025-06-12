@@ -39,6 +39,18 @@ export class CartService {
     this.cartItems.next([...currentItems]);
   }
 
+  removeItem(productName: string): void {
+    const currentItems = this.cartItems.value;
+    const itemToRemove = currentItems.find(item => item.product.name === productName);
+    if (itemToRemove) {
+      this.updateCart(itemToRemove.product, 0);
+    }
+  }
+
+  clearCart(): void {
+    this.cartItems.next([]);
+  }
+
   getCartItems(): Observable<CartItem[]> {
     return this.cartItems$;
   }
