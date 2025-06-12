@@ -1,0 +1,119 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+
+.cart {
+  padding: 1.5rem;
+  background: $white;
+  border-radius: 8px;
+  width: 384px;
+
+  h2 {
+    @include TextPreset2;
+    color: $red;
+    margin-bottom: 2rem;
+  }
+}
+
+.cart-items {
+  @include flex(column, flex-start, stretch, 1rem);
+  margin-bottom: 1.5rem;
+}
+
+.cart-item {
+  @include flex(row, space-between, center, 1rem);
+  width: 100%;
+
+
+  .item-details {
+    flex: 1;
+    @include flex(column, center, flex-start, 0.25rem);
+
+    h3 {
+      @include TextPreset3;
+      color: $rose-900;
+      margin: 0;
+    }
+
+    .price-details {
+      @include flex(row, flex-start, center, 0.5rem);
+      
+      p {
+        @include TextPreset4;
+        color: $rose-500;
+      }
+
+      .quantity {
+        font-family: $font-semibold;
+        color: $red;
+      }
+      
+      .item-total {
+        font-family: $font-semibold;
+        color: $rose-900;
+      }
+    }
+  }
+
+  .remove-item {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0.5rem;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+.order-summary {
+  @include flex(column, flex-start, stretch, 1.5rem);
+  
+  .cart-total {
+    @include flex(row, space-between, center, 0);
+    
+    h3 {
+      @include TextPreset4;
+      color: $rose-900;
+      font-family: $font-regular;
+    }
+
+    .total-price {
+      @include TextPreset1;
+      color: $rose-900;
+      font-size: 32px;
+    }
+  }
+
+  .carbon-neutral-delivery {
+    @include flex(row, center, center, 0.5rem);
+    background: $rose-100;
+    padding: 1rem;
+    border-radius: 8px;
+
+    p {
+      @include TextPreset4Bold;
+      color: $rose-900;
+
+      b {
+        color: $rose-900;
+      }
+    }
+  }
+
+  .confirm-order {
+    @include flex(row, center, center);
+    width: 100%;
+    padding: 1rem;
+    background: $red;
+    color: $white;
+    border: none;
+    border-radius: 50px;
+    @include TextPreset4Bold;
+    cursor: pointer;
+
+    &:hover {
+      background: $rose-400;
+    }
+  }
+}

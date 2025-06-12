@@ -4,11 +4,15 @@
 
     <div class="desserts-container">
       @for (item of desserts; track $index) {
-          <div class="dessert-item">
-
+        <div class="dessert-item">
           <section class="item-image-add-to-cart">
             <img src="{{ desserts?.[$index]?.image?.tablet }}" alt="dessert image">
-            <app-add-to-cart />
+            @if (desserts?.[$index]) {
+              <app-add-to-cart 
+                [product]="desserts![$index]"
+                (quantityChange)="onQuantityChange($event)"
+              />
+            }
           </section>
           <section class="item-info">
             <p class="category">{{desserts?.[$index]?.category}} </p>
@@ -16,19 +20,9 @@
             <p class="price">${{ desserts?.[$index]?.price }}</p>
           </section>
         </div>
-        }
+      }
     </div>
   </section>
 
-  <section class="cart">
-    <h2>Your Cart (0)</h2>
-    <div class="content">
-      <div class="empty-cart-content">
-        <img src="images/illustration-empty-cart.svg" alt="empty cart svg">
-        <p class="empty-cart-description">
-          Your added items will appear here
-        </p>
-      </div>
-    </div>
-  </section>
+  <app-cart></app-cart>
 </main>
