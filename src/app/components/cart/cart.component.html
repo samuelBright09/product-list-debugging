@@ -37,7 +37,15 @@
         <img src="images/icon-carbon-neutral.svg" alt="Carbon neutral icon">
         <p>This is a <b>carbon-neutral</b> delivery</p>
       </div>
-      <button class="confirm-order">Confirm Order</button>
+      <button class="confirm-order" (click)="openOrderConfirmedModal()">Confirm Order</button>
     </div>
   }
 </section>
+
+@if (showOrderConfirmedModal) {
+  <app-order-confirmed-modal
+    [cartItems]="cartItems"
+    [orderTotal]="cartTotal"
+    (startNewOrderEvent)="startNewOrder()"
+  ></app-order-confirmed-modal>
+}

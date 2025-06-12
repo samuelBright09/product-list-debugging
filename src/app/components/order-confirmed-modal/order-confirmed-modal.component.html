@@ -1,0 +1,34 @@
+<div class="modal-overlay">
+  <div class="modal-content">
+    <div class="order-confirmed-header">
+      <img src="images/icon-order-confirmed.svg" alt="Order Confirmed">
+      <h2>Order Confirmed</h2>
+      <p>We hope you enjoy your food!</p>
+    </div>
+    <div class="order-summary-items">
+      @for (item of cartItems; track item.product.name) {
+        <div class="summary-item">
+          <div class="item-details">
+            <img [src]="item.product.image.thumbnail" [alt]="item.product.name" class="item-thumbnail">
+            <div>
+              <h3>{{ item.product.name }}</h3>
+              <div class="price-details">
+                <p class="quantity">{{ item.quantity }}x</p>
+                <p class="unit-price"> ${{ item.product.price.toFixed(2) }}</p>
+              </div>
+            </div>
+          </div>
+          <p class="item-total">${{ (item.product.price * item.quantity).toFixed(2) }}</p>
+        </div>
+        @if (!$last) {
+          <hr>
+        }
+      }
+    </div>
+    <div class="order-total-container">
+      <p>Order Total</p>
+      <p class="order-total">${{ orderTotal.toFixed(2) }}</p>
+    </div>
+    <button class="start-new-order-button" (click)="startNewOrder()">Start New Order</button>
+  </div>
+</div> 

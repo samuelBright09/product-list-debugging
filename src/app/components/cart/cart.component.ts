@@ -2,10 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService, CartItem } from '../../services/cart.service';
 import { RouterModule } from '@angular/router';
+import { OrderConfirmedModalComponent } from '../order-confirmed-modal/order-confirmed-modal.component';
 
 @Component({
   selector: 'app-cart',
-  imports: [CommonModule, RouterModule],
+  standalone: true,
+  imports: [CommonModule, RouterModule, OrderConfirmedModalComponent],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
@@ -13,21 +15,32 @@ export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
   cartTotal: number = 0;
   totalCartItems: number = 0;
+  showOrderConfirmedModal: boolean = false;
 
   private cartService = inject(CartService);
 
   ngOnInit(): void {
-    this.cartService.getCartItems().subscribe(items => {
+    this.cartService.cartItems$.subscribe(items => {
       this.cartItems = items;
-      this.totalCartItems = items.reduce((sum, item) => sum + item.quantity, 0);
+      this.updateCartSummary();
     });
-    this.cartService.getCartTotal().subscribe(total => this.cartTotal = total);
+  }
+
+  updateCartSummary(): void {
+    this.totalCartItems = this.cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    this.cartTotal = this.cartItems.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
   }
 
   removeItem(productName: string): void {
-    const itemToRemove = this.cartItems.find(item => item.product.name === productName);
-    if (itemToRemove) {
-      this.cartService.updateCart(itemToRemove.product, 0);
-    }
+    this.cartService.removeItem(productName);
+  }
+
+  openOrderConfirmedModal(): void {
+    this.showOrderConfirmedModal = true;
+  }
+
+  startNewOrder(): void {
+    this.cartService.clearCart();
+    this.showOrderConfirmedModal = false;
   }
 }
