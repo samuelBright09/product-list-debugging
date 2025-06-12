@@ -6,7 +6,7 @@
       @for (item of desserts; track $index) {
         <div class="dessert-item">
           <section class="item-image-add-to-cart">
-            <img src="{{ desserts?.[$index]?.image?.tablet }}" alt="dessert image">
+            <img src="{{ desserts?.[$index]?.image?.desktop }}" alt="dessert image">
             @if (desserts?.[$index]) {
               <app-add-to-cart 
                 [product]="desserts![$index]"
